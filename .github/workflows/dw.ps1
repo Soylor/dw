@@ -41,13 +41,18 @@ if ($codigo) {
     Invoke-WebRequest -Uri $dwServiceUrl -OutFile $tempPath
 
     # Ejecutar la instalación desatendida
-    Start-Process -FilePath $tempPath -ArgumentList "/S /CODE=$codigo" -Wait
+    Start-Process -FilePath $tempPath -ArgumentList "-silent key=$codigo logpath=$env:TEMP\dwagent_install.log" -Wait
+
+    # Verificar si la instalación fue exitosa
+    if (Test-Path "C:\Program Files\DWAgent") {
+        Write-Output "Instalación completada para el equipo $computerName con el código $codigo."
+    } else {
+        Write-Output "La instalación no se completó correctamente."
+    }
 
     # Borrar los archivos temporales
     Remove-Item -Path $tempPath
     Remove-Item -Path $xmlPath
-
-    Write-Output "Instalación completada para el equipo $computerName con el código $codigo. Archivos temporales eliminados."
 } else {
     Write-Output "No se encontró el código para el equipo $computerName en el cliente $clienteNombre en el archivo XML."
 }
