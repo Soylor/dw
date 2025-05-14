@@ -6,9 +6,11 @@ $xmlPath = "$env:TEMP\dw.xml"
 
 # Descargar el archivo XML
 Invoke-WebRequest -Uri $xmlUrl -OutFile $xmlPath
-
 # Cargar el archivo XML
 [xml]$xml = Get-Content $xmlPath
+
+# Preguntar por el cliente
+$clienteNombre = Read-Host "Introduce el nombre del cliente"
 
 # Obtener el nombre del equipo actual
 $computerName = $env:COMPUTERNAME
@@ -16,10 +18,12 @@ $computerName = $env:COMPUTERNAME
 # Buscar el código del equipo en el archivo XML
 $codigo = $null
 foreach ($cliente in $xml.Clientes.Cliente) {
-    foreach ($pc in $cliente.PC) {
-        if ($pc.nombre -eq $computerName) {
-            $codigo = $pc.codigo
-            break
+    if ($cliente.nombre -eq $clienteNombre) {
+        foreach ($pc in $cliente.PC) {
+            if ($pc.nombre -eq $computerName) {
+                $codigo = $pc.codigo
+                break
+            }
         }
     }
     if ($codigo) { break }
@@ -40,5 +44,5 @@ if ($codigo) {
 
     Write-Output "Instalación completada para el equipo $computerName con el código $codigo."
 } else {
-    Write-Output "No se encontró el código para el equipo $computerName en el archivo XML."
+    Write-Output "No se encontró el código para el equipo $computerName en el cliente $clienteNombre en el archivo XML."
 }
