@@ -6,6 +6,7 @@ $xmlPath = "$env:TEMP\dw.xml"
 
 # Descargar el archivo XML
 Invoke-WebRequest -Uri $xmlUrl -OutFile $xmlPath
+
 # Cargar el archivo XML
 [xml]$xml = Get-Content $xmlPath
 
