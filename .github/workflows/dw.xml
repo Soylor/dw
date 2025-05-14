@@ -1,0 +1,9 @@
+<Clientes>
+    <Cliente nombre="RIAL">
+        <PC nombre="PC21" codigo="ABC123"/>
+        <PC nombre="PC22" codigo="DEF456"/>
+    </Cliente>
+    <Cliente nombre="COBALLES">
+        <PC nombre="PC3" codigo="GHI789"/>
+    </Cliente>
+</Clientes>
