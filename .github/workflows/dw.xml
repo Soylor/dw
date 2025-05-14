@@ -9,4 +9,5 @@
     <Cliente nombre="EURONET">
         <PC nombre="LOR2025" codigo="486-305-474"/>
         <PC nombre="PC22" codigo="DEF456"/>
+    </Cliente>
 </Clientes>
