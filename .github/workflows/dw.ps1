@@ -1,5 +1,5 @@
 # URL del archivo XML en GitHub
-$xmlUrl = "https://github.com/soylor/dw/raw/main/dw.xml"
+$xmlUrl = "https://github.com/Soylor/dw/raw/main/.github/workflows/dw.xml"
 
 # Ruta temporal para guardar el archivo XML
 $xmlPath = "$env:TEMP\dw.xml"
