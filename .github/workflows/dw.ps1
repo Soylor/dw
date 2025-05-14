@@ -43,7 +43,11 @@ if ($codigo) {
     # Ejecutar la instalación desatendida
     Start-Process -FilePath $tempPath -ArgumentList "/S /CODE=$codigo" -Wait
 
-    Write-Output "Instalación completada para el equipo $computerName con el código $codigo."
+    # Borrar los archivos temporales
+    Remove-Item -Path $tempPath
+    Remove-Item -Path $xmlPath
+
+    Write-Output "Instalación completada para el equipo $computerName con el código $codigo. Archivos temporales eliminados."
 } else {
     Write-Output "No se encontró el código para el equipo $computerName en el cliente $clienteNombre en el archivo XML."
 }
